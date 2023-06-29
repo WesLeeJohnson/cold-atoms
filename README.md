@@ -45,7 +45,7 @@ no risk of breaking the system python distribution.
 
 ```shell
 # Download the package source from github.
-git clone https://github.com/d-meiser/cold-atoms
+git https://github.com/WesLeeJohnson/cold-atoms.git
 
 cd cold-atoms
 
