@@ -58,11 +58,14 @@ conda activate my_env
 # Download external dependencies.
 conda install --file requirements.txt
 
-# Install the package.
-pip install .
+# Install in place to run tests
+python setup.py develop 
 
 # Run the tests of the package.
 nosetests
+
+# Install the package.
+pip install .
 
 # Have a look at the examples.
 cd examples
