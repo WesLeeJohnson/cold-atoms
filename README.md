@@ -49,8 +49,14 @@ git clone https://github.com/d-meiser/cold-atoms
 
 cd cold-atoms
 
+# suggested to use conda env 
+conda create --name myenv python=3.7
+
+# activate env 
+conda activate my_env
+
 # Download external dependencies.
-pip install -r requirements.txt
+conda install --file requirements.txt
 
 # Build package.
 python setup.py develop
