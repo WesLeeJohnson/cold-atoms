@@ -47,12 +47,12 @@ class Ensemble(object):
     def resize(self, new_size):
         shape = list(self.x.shape)
         shape[0] = new_size
-        self.x.resize(shape)
-        self.v.resize(shape)
+        self.x.resize(shape, refcheck=False)
+        self.v.resize(shape, refcheck=False)
         for particle_prop in self.particle_properties:
             shape = [self.particle_properties[particle_prop].shape]
             shape[0] = new_size
-            self.particle_properties[particle_prop].resize(shape)
+            self.particle_properties[particle_prop].resize(shape, refcheck=False)
 
     def delete(self, indices):
         """Delete a subset of particles.
