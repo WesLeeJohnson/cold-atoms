@@ -50,7 +50,7 @@ git clone https://github.com/d-meiser/cold-atoms
 cd cold-atoms
 
 # suggested to use conda env 
-conda create --name myenv python=3.7
+conda create --name myenv python=3.10
 
 # activate env 
 conda activate my_env
