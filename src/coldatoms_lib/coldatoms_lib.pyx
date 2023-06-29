@@ -116,12 +116,12 @@ cdef class Rng(object):
     def context(self):
         return <uintptr_t>self._generator
 
-    def __cinit__(self, seed=None):
+    def __init__(self, seed=None):
         self._generator = ccoldatoms_lib.ca_rand_create()
         if seed is not None:
             ccoldatoms_lib.ca_rand_seed(self._generator, seed)
 
-    def __dealloc__(self):
+    def __del__(self):
         ccoldatoms_lib.ca_rand_destroy(&self._generator)
 
     def seed(self, unsigned int seed):
@@ -178,4 +178,3 @@ def add_radiation_pressure(
         &hbar_k[0],
         &nbars[0],
         &f[0, 0])
-
