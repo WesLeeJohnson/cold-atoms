@@ -59,7 +59,7 @@ conda activate my_env
 conda install --file requirements.txt
 
 # Install in place to run tests
-python setup.py develop 
+pip install -e . 
 
 # Run the tests of the package.
 nosetests
