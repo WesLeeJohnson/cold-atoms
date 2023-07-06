@@ -26,9 +26,9 @@ void ca_compute_nbars(int n,
 double scattering_rate(double gamma, double s, double delta)
 {
 	double nu = gamma / two_pi;
-	double half_gamma_squared = 0.25 * gamma * gamma;
-	return s * nu * half_gamma_squared /
-		(half_gamma_squared * (1.0 + 2.0 * s) + SQR(delta));
+	double inv_half_gamma_squared = 4 / SQR(gamma);
+	return s * nu /
+		((1.0 + 2.0 * s) + SQR(delta) * inv_half_gamma_squared);
 }
 
 static void add_radiation_pressure_large_n(
