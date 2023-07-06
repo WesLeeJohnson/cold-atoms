@@ -105,3 +105,4 @@ ENV/
 # Third party libs
 sprng*
 diff.txt
+examples/Doppler Cooling_edited.ipynb
