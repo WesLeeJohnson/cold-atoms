@@ -68,33 +68,27 @@ static void add_radiation_pressure_small_n(
 	if (0 == n) return;
 	assert(n <= CA_LARGE_N);
 
-	//ca_rand_gaussian(ctx, n, 0.0, 1.0, &directions[0][0]);
-	//ca_rand_gaussian(ctx, n, 0.0, 1.0, &directions[1][0]);
-	//ca_rand_gaussian(ctx, n, 0.0, 1.0, &directions[2][0]);
+	ca_rand_gaussian(ctx, n, 0.0, 1.0, &directions[0][0]);
+	ca_rand_gaussian(ctx, n, 0.0, 1.0, &directions[1][0]);
+	ca_rand_gaussian(ctx, n, 0.0, 1.0, &directions[2][0]);
 
-	//for (i = 0; i < 3; ++i) {
-	//	for (j = 0; j < n; ++j) {
-	//		nrms[j] += SQR(directions[i][j]);
-	//	}
-	//}
-	//for (j = 0; j < n; ++j) {
-	//	nrms[j] = sqrt(nrms[j]);
-	//}
-	//for (i = 0; i < 3; ++i) {
-	//	for (j = 0; j < n; ++j) {
-	//		directions[i][j] /= nrms[j];
-	//	}
-	//}
-
-	//for (i = 0; i < 3; ++i) {
-	//	for (j = 0; j < n; ++j) {
-	//		recoil[i] += directions[i][j];
-	//	}
-	//	recoil[i] *= hbar_k_nrm;
-	//}
-	for (i = 0; i < n; ++i) {
-		ca_rand_unit_vector(ctx, &directions[0][i]);
+	for (i = 0; i < 3; ++i) {
+		for (j = 0; j < n; ++j) {
+			nrms[j] += SQR(directions[i][j]);
+		}
 	}
+	for (j = 0; j < n; ++j) {
+		nrms[j] = sqrt(nrms[j]);
+	}
+	for (i = 0; i < 3; ++i) {
+		for (j = 0; j < n; ++j) {
+			directions[i][j] /= nrms[j];
+		}
+	}
+
+	//for (i = 0; i < n; ++i) {
+	//	ca_rand_unit_vector(ctx, &directions[0][i]);
+	//}
 
 	for (i = 0; i < 3; ++i) {
 		for (j = 0; j < n; ++j) {
