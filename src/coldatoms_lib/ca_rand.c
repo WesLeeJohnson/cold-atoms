@@ -61,6 +61,30 @@ static double generate_gaussian_random_number(struct CARandCtx* ctx, double mean
 }
 
 
+void ca_rand_unit_vector(struct CARandCtx* ctx, double* n_hat)
+{
+	const double two_pi = 2.0 * 3.14159265358979323846;
+	double u1, u2;
+
+	static double theta, phi;
+	static double x, y, z;
+
+	u1 = dsfmt_genrand_close_open(&ctx->dsfmt);
+	u2 = dsfmt_genrand_close_open(&ctx->dsfmt);
+
+	theta = acos(2.0 * u1 - 1.0);
+	phi = two_pi * u2;
+
+	x = sin(theta) * cos(phi);
+	y = sin(theta) * sin(phi);
+	z = cos(theta);
+
+	n_hat[0] = x;
+	n_hat[1] = y;
+	n_hat[2] = z;
+}
+
+
 void ca_rand_gaussian(struct CARandCtx* ctx, int n, double mean, double std,
 	double* x)
 {
