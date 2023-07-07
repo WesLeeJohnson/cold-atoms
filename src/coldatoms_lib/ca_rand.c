@@ -68,6 +68,8 @@ void ca_rand_unit_vector(struct CARandCtx* ctx, double* n_hat)
 
 	static double theta, phi;
 	static double x, y, z;
+	static double sin_theta, cos_theta;
+	static double sin_phi, cos_phi;
 
 	u1 = dsfmt_genrand_close_open(&ctx->dsfmt);
 	u2 = dsfmt_genrand_close_open(&ctx->dsfmt);
@@ -75,9 +77,14 @@ void ca_rand_unit_vector(struct CARandCtx* ctx, double* n_hat)
 	theta = acos(2.0 * u1 - 1.0);
 	phi = two_pi * u2;
 
-	x = sin(theta) * cos(phi);
-	y = sin(theta) * sin(phi);
-	z = cos(theta);
+	sin_theta = sin(theta);
+	cos_theta = cos(theta);
+	sin_phi = sin(phi);
+	cos_phi = cos(phi);
+
+	x = sin_theta * cos_phi; 
+	y = sin_theta * sin_phi;
+	z = cos_theta;
 
 	n_hat[0] = x;
 	n_hat[1] = y;
