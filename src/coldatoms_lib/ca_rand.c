@@ -68,13 +68,13 @@ void ca_rand_unit_vector(struct CARandCtx* ctx, double* n_hat)
 	double sqrt_1_minus_u1_sq;
 
 
-	u1 = dsfmt_genrand_close_open(&ctx->dsfmt);
-	u2 = dsfmt_genrand_close_open(&ctx->dsfmt);
+	u1 = dsfmt_genrand_close_open(&ctx->dsfmt) * 2.0 - 1.0;
+	u2 = dsfmt_genrand_close_open(&ctx->dsfmt) * two_pi;
 
 	sqrt_1_minus_u1_sq = sqrt(1 - u1 * u1);
 	
-	n_hat[0] = sqrt_1_minus_u1_sq * cos(two_pi * u2); 
-	n_hat[1] = sqrt_1_minus_u1_sq * sin(two_pi * u2);
+	n_hat[0] = sqrt_1_minus_u1_sq * cos(u2); 
+	n_hat[1] = sqrt_1_minus_u1_sq * sin(u2);
 	n_hat[2] = u1;
 }
 
