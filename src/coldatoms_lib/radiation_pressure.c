@@ -61,6 +61,7 @@ static void add_radiation_pressure_small_n(
 	double* f)
 {
 	double directions[3][CA_LARGE_N];
+	double direction[3];
 	double nrms[CA_LARGE_N] = { 0.0 };
 	double recoil[3] = { 0.0 };
 	int i, j;
@@ -87,7 +88,10 @@ static void add_radiation_pressure_small_n(
 	//}
 
 	for (i = 0; i < n; ++i) {
-		ca_rand_unit_vector(ctx, &directions[0][i]);
+		ca_rand_unit_vector(ctx, &direction[0]);
+		directions[0][i] = direction[0];
+		directions[1][i] = direction[1];
+		directions[2][i] = direction[2];
 	}
 
 	for (i = 0; i < 3; ++i) {
