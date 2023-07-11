@@ -19,7 +19,8 @@ from .radiation_pressure import (
     RadiationPressure
 )
 from .penning_trap import (
-    HarmonicTrapPotential
+    HarmonicTrapPotential,
+    RotatingWallTrapPotential
 )
 from .version import (
     __version__
