@@ -18,6 +18,29 @@ def _harmonic_trap_forces_ref(positions, q, kx, ky, kz, phi, dt, f):
 
 
 class HarmonicTrapPotential(object):
+    """
+    This class defines the trap potential. It assumes a harmonic
+    potential in the x y and z directions. The stength of the trap
+    in each direction is given by kx, ky, and kz respectively.
+
+    Parameters
+    ----------
+    kx : float
+        The x stiffness.
+    ky : float
+        The y stiffness.
+    kz : float
+        The z stiffness.
+
+    Methods
+    -------
+    force(dt, ensemble, f)
+        Calculates the force on the ions due to the trap potential.
+
+    Examples
+    --------
+    >>> trap_potential = HarmonicTrapPotential(kx, ky, kz)
+    """
     def __init__(self, kx, ky, kz):
         self.kx = kx
         self.ky = ky
