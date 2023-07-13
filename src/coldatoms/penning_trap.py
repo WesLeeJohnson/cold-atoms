@@ -94,6 +94,7 @@ class RotatingWallTrapPotential(object):
     --------
     >>> trap_potential = TrapPotential(m_Be/q_Be*wz**2, ma.delta, ma.wrot, np.pi / 2.0)
     """
+    #TODO: add the force calculation to the coldatoms_lib
     def __init__(self, kz, delta, omega, phi_0):
         self.kz = kz
         self.kx = -(0.5 + delta) * kz
