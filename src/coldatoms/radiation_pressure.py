@@ -3,7 +3,8 @@ import coldatoms_lib
 import random
 
 class RadiationPressure(object):
-    """The force experienced by level atoms undergoing resonance fluorescence.
+    """
+    The force experienced by level atoms undergoing resonance fluorescence.
 
     This class computes the radiation pressure force, both determinstic and
     fluctuating recoil components, on an atom driven by a monochromatic laser
@@ -17,25 +18,50 @@ class RadiationPressure(object):
     propagation directions. In the context of laser cooling we are limited to
     situations of low total saturation and we cannot handle sub-Doppler
     cooling.
+
+    Parameters
+    ----------
+    gamma : float
+        The atomic decay rate (2\pi / excited state lifetime).
+    hbar_k : float
+        The recoil momentum of a single photon.
+    intensity : object
+        An object with a method 'intensities' that takes an array of atomic
+        positions and returns an array of intensities at those positions.
+    detuning : object
+        An object with a method 'detunings' that takes an array of atomic
+        positions and an array of atomic velocities and returns an array of
+        detunings at those positions and velocities. Red detuning is
+        negative and blue detuning is positive.
+    seed : int
+        A seed for the random number generator used to generate the
+        stochastic recoil force. If None, a random seed is generated.
+
+    Attributes
+    ----------
+    gamma : float
+        The atomic decay rate (2\pi / excited state lifetime).
+    hbar_k : float
+        The recoil momentum of a single photon.
+    intensity : object
+        An object with a method 'intensities' that takes an array of atomic
+        positions and returns an array of intensities at those positions.
+    detuning : object
+        An object with a method 'detunings' that takes an array of atomic
+        positions and an array of atomic velocities and returns an array of
+        detunings at those positions and velocities. Red detuning is
+        negative and blue detuning is positive.
+    rng_context : object
+        A context object for the random number generator used to generate the
+        stochastic recoil force.
+
+    Methods
+    -------
+    force(dt, ensemble, f)  
+        Compute the radiation pressure force on an ensemble of atoms.
     """
 
     def __init__(self, gamma, hbar_k, intensity, detuning,seed=None):
-        """Specification of a RadiationPressure object.
-
-        gamma -- The atomic decay rate (2\pi / excited state lifetime).
-        hbar_k -- Single photon recoil momentum.
-        intensity -- The intensity (in units of the saturation intensity) as a
-                     function of atomic position. This object must have a
-                     method intensities that, when applied to the atomic
-                     positions returns the intensities at the position of the
-                     atoms.
-        detuning -- The detuning of the atomic transition from the laser. Red
-                    detuning is negative and blue detuning is positive. The
-                    detuning is a function of atomic velocities and may depend
-                    on their position. This function must be applicable to x
-                    and v and it should return an array with the detuning
-                    values.
-        """
         self.gamma = gamma
         self.hbar_k = np.copy(hbar_k)
         self.intensity = intensity
@@ -43,8 +69,6 @@ class RadiationPressure(object):
         if seed is None:
             seed = random.randint(10,10**6+10)
         self.rng_context = coldatoms_lib.Rng(seed).context()
-
-
 
     def force(self, dt, ensemble, f):
         s_of_r = self.intensity.intensities(ensemble.x)
