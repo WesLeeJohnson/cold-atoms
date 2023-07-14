@@ -6,4 +6,4 @@ sphinx
 jupyter
 cython
 coveralls
-
+scipy
