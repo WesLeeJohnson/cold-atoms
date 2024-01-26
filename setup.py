@@ -62,7 +62,9 @@ def get_package_info():
         include_dirs=['src/coldatoms_lib/', numpy.get_include()],
         extra_compile_args=extra_compile_args,
         extra_link_args=extra_link_args
-        )])
+        )]
+        ,compiler_directives={'language_level' : "3"}
+        )
 
     packages = find_packages(where='src',
                              exclude=('tests', 'docs', 'examples'))
