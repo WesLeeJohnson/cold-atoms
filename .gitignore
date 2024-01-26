@@ -106,3 +106,5 @@ ENV/
 sprng*
 diff.txt
 examples/Doppler Cooling_edited.ipynb
+remove_compiled_files.sh
+tests/nose_debug
