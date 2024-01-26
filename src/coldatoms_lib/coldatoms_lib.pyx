@@ -1,7 +1,7 @@
 import cython
 import numpy as np
 cimport numpy as np
-cimport ccoldatoms_lib
+from . cimport ccoldatoms_lib
 import atexit
 from libc.stdint cimport uintptr_t
 
