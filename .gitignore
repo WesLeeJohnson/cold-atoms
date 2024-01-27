@@ -108,3 +108,7 @@ diff.txt
 examples/Doppler Cooling_edited.ipynb
 remove_compiled_files.sh
 tests/nose_debug
+nose_debug
+.vscode/settings.json
+src/coldatoms_lib/dSFMT/test
+src/coldatoms_lib/dSFMT/test.c
