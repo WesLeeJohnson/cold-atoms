@@ -68,7 +68,9 @@ class RadiationPressure(object):
         self.detuning = detuning
         if seed is None:
             seed = random.randint(10,10**6+10)
-        self.rng_context = coldatoms_lib.Rng(seed).context()
+        rng = coldatoms_lib.rng
+        rng.seed(seed)
+        self.rng_context = rng.context()
 
     def force(self, dt, ensemble, f):
         s_of_r = self.intensity.intensities(ensemble.x)
