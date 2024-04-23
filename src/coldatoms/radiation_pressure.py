@@ -69,7 +69,7 @@ class RadiationPressure(object):
         if seed is None:
             seed = random.randint(10,10**6+10)
         rng = coldatoms_lib.rng
-        rng.seed(seed)
+        rng.__init__(seed)  
         self.rng_context = rng.context()
 
     def force(self, dt, ensemble, f):
