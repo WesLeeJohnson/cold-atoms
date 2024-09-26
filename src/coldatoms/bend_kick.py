@@ -8,12 +8,13 @@ def bend_kick_update_reference_impl(dt, omegaB, x, v):
     sinTheta = np.sin(theta)
 
     x[:, 0] = x[:, 0] + (
-        sinTheta * v[:, 0] + (cosTheta - 1.0) * v[:, 1]) / omegaB
+        sinTheta * v[:, 0] - (cosTheta - 1.0) * v[:, 1]) / omegaB
     x[:, 1] = x[:, 1] + (
-        -(cosTheta - 1.0) * v[:, 0] + sinTheta * v[:, 1]) / omegaB
+        (cosTheta - 1.0) * v[:, 0] + sinTheta * v[:, 1]) / omegaB
+    x[:, 2] = x[:, 2] + dt * v[:, 2]    
 
-    vx = cosTheta * v[:, 0] - sinTheta * v[:, 1]
-    v[:, 1] = sinTheta * v[:, 0] + cosTheta * v[:, 1]
+    vx = cosTheta * v[:, 0] + sinTheta * v[:, 1]
+    v[:, 1] = -sinTheta * v[:, 0] + cosTheta * v[:, 1]
     v[:, 0] = vx
 
 
