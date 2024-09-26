@@ -19,11 +19,11 @@ void ca_bend_kick_update_scalar(double dt, double omegaB,
 	struct Vec3 *vel = (struct Vec3 *)v;
 
 	double m_pos[2][2] = {
-		{sinTheta / omegaB, (cosTheta - 1.0) / omegaB},
-		{-(cosTheta - 1.0) / omegaB, sinTheta / omegaB}};
+		{sinTheta / omegaB, -(cosTheta - 1.0) / omegaB},
+		{(cosTheta - 1.0) / omegaB, sinTheta / omegaB}};
 	double m_vel[2][2] = {
-		{cosTheta, -sinTheta},
-		{sinTheta, cosTheta}};
+		{cosTheta, sinTheta},
+		{-sinTheta, cosTheta}};
 	
 	double vx_tmp;
 	double vy_tmp;
@@ -57,12 +57,12 @@ void ca_bend_kick_update_vector(double dt, const double *  omegaB,
 		cosTheta = cos(theta);
 		sinTheta = sin(theta);
 
-		pos[i].x += (sinTheta * vel[i].x + (cosTheta - 1.0) * vel[i].y) / omegaB[i];
-		pos[i].y += (-(cosTheta - 1.0) * vel[i].x + sinTheta * vel[i].y) / omegaB[i];
+		pos[i].x += (sinTheta * vel[i].x - (cosTheta - 1.0) * vel[i].y) / omegaB[i];
+		pos[i].y += ((cosTheta - 1.0) * vel[i].x + sinTheta * vel[i].y) / omegaB[i];
 		pos[i].z += dt * vel[i].z;
 
-		vx_tmp = cosTheta * vel[i].x - sinTheta * vel[i].y;
-		vy_tmp = sinTheta * vel[i].x + cosTheta * vel[i].y;
+		vx_tmp = cosTheta * vel[i].x + sinTheta * vel[i].y;
+		vy_tmp = -sinTheta * vel[i].x + cosTheta * vel[i].y;
 		vel[i].x = vx_tmp;
 		vel[i].y = vy_tmp;
 	}
