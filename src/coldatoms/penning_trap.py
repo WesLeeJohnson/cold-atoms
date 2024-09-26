@@ -101,7 +101,7 @@ class RotatingWallTrapPotential(object):
         self.ky = -(0.5 - delta) * kz
         self.phi_0 = phi_0
         self.phi = phi_0
-        self.omega = omega
+        self.omega = -omega
 
     def reset_phase(self):
         """
