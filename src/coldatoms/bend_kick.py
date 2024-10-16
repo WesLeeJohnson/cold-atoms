@@ -17,6 +17,11 @@ def bend_kick_update_reference_impl(dt, omegaB, x, v):
     v[:, 1] = -sinTheta * v[:, 0] + cosTheta * v[:, 1]
     v[:, 0] = vx
 
+def kick(f,m): 
+    if np.isscalar(m):
+        return f/m
+    else:
+        return f/m[:, np.newaxis]
 
 def bend_kick(dt, Bz, ensemble, forces, num_steps=1, reference_impl=False):
     """Integrator for particle motion in a constant magnetic field"""
@@ -51,15 +56,15 @@ def bend_kick(dt, Bz, ensemble, forces, num_steps=1, reference_impl=False):
         updater(0.5 * dt, omegaB, ensemble.x, ensemble.v)
 
         f = np.zeros_like(ensemble.v)
-
-        for i in range(num_steps - 1):
+        
+        for _ in range(num_steps - 1):
             for force in forces:
                 force.force(dt, ensemble, f)
-            ensemble.v += f / m
+            ensemble.v += kick(f,m)
             updater(dt, omegaB, ensemble.x, ensemble.v)
             f.fill(0.0)
 
         for force in forces:
             force.force(dt, ensemble, f)
-        ensemble.v += f / m
+        ensemble.v += kick(f,m)
         updater(0.5 * dt, omegaB, ensemble.x, ensemble.v)
